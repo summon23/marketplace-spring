@@ -24,7 +24,6 @@ public class ProductVariantDaoImpl  extends JdbcDaoSupport implements ProductVar
     @Override
     @Transactional
     public void updateName(Long catalogId, String newName) {
-//        Long productVariantId = productVariant.getId();
         String sql = "UPDATE product_variant SET long_name = ? WHERE id = ? ";
         getJdbcTemplate().update(sql, new Object[]{newName, catalogId });
 
