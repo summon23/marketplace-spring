@@ -2,6 +2,8 @@ package com.summon23.marketplacers.controller;
 
 import com.summon23.marketplacers.entity.ProductVariant;
 import com.summon23.marketplacers.entity.ProductVendor;
+import com.summon23.marketplacers.entity.projector.ProductVendorListInvoice;
+import com.summon23.marketplacers.entity.projector.ProductVendorPO;
 import com.summon23.marketplacers.repository.ProductVariantRepository;
 import com.summon23.marketplacers.repository.ProductVendorRepository;
 import com.summon23.marketplacers.service.ProductVendorService;
@@ -74,5 +76,25 @@ public class CatalogController {
 
         return ResponseEntity.ok().build();
     }
+
+    @GetMapping("/currency/{curr}")
+    public ResponseEntity<List<ProductVendorListInvoice>> getSampleWithCloseProjection (
+            @PathVariable(value = "curr") String currency
+    ) {
+        List<ProductVendorListInvoice> getDataProduct = productVendorService.getAllByCloseProjection(currency);
+
+        return new ResponseEntity<List<ProductVendorListInvoice>>(getDataProduct, new HttpHeaders(), HttpStatus.OK);
+    }
+
+    @GetMapping("/variant/{variantid}")
+    public ResponseEntity<List<ProductVendorPO>> getSampleWithOpenProjection (
+            @PathVariable(value = "variantid") Integer variantId
+    ) {
+        List<ProductVendorPO> getDataProduct = productVendorService.getAllByOpenProjection(variantId);
+
+        return new ResponseEntity<List<ProductVendorPO>>(getDataProduct, new HttpHeaders(), HttpStatus.OK);
+    }
+
+
 
 }

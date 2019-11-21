@@ -3,11 +3,12 @@ package com.summon23.marketplacers.entity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.UUID;
 
 @Entity
 @Table(name = "product_vendor")
-public class ProductVendor {
+public class ProductVendor implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
