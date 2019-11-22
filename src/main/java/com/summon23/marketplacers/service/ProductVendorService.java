@@ -52,5 +52,9 @@ public class ProductVendorService {
         return productVendorRepository.findByProductVariantId(id);
     }
 
+    public List<ProductVendorPO> getAllByDynamicProjection(Integer id) {
+        return productVendorRepository.findByProductVariantId(id, ProductVendorPO.class);
+    }
+
 
 }

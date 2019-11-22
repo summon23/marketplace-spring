@@ -11,6 +11,8 @@ public interface ProductVendorPO {
 
     String getVendorId();
 
-    @Value("#{target.currency} #{target.id}")
-    String getPrice();
+    String getCurrency();
+
+//    @Value("#{target.currency} #{target.id}")
+//    String getPrice();
 }

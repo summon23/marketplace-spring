@@ -14,4 +14,6 @@ import java.util.List;
 public interface ProductVendorRepository extends JpaRepository<ProductVendor, Long> {
     List<ProductVendorListInvoice> findByCurrency(String currency);
     List<ProductVendorPO> findByProductVariantId(Integer id);
+
+    <T> List<T> findByProductVariantId(Integer id, Class<T> tClass);
 }

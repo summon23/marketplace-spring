@@ -8,6 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
@@ -16,7 +17,7 @@ import javax.validation.constraints.*;
 
 @Entity
 @Table(name = "product_variant")
-public class ProductVariant {
+public class ProductVariant implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
