@@ -2,10 +2,12 @@ package com.summon23.marketplacers.controller;
 
 import com.summon23.marketplacers.entity.ProductVariant;
 import com.summon23.marketplacers.entity.ProductVendor;
+import com.summon23.marketplacers.entity.projector.ProductVariantInvoiceList;
 import com.summon23.marketplacers.entity.projector.ProductVendorListInvoice;
 import com.summon23.marketplacers.entity.projector.ProductVendorPO;
 import com.summon23.marketplacers.repository.ProductVariantRepository;
 import com.summon23.marketplacers.repository.ProductVendorRepository;
+import com.summon23.marketplacers.service.ProductVariantService;
 import com.summon23.marketplacers.service.ProductVendorService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -33,6 +35,9 @@ public class CatalogController {
 
     @Autowired
     private ProductVendorService productVendorService;
+
+    @Autowired
+    private ProductVariantService productVariantService;
 
     public CatalogController(ProductVariantRepository productVariantRepository, ProductVendorRepository productVendorRepository) {
         this.productVariantRepository = productVariantRepository;
@@ -90,10 +95,20 @@ public class CatalogController {
     public ResponseEntity<List<ProductVendorPO>> getSampleWithOpenProjection (
             @PathVariable(value = "variantid") Integer variantId
     ) {
-        List<ProductVendorPO> getDataProduct = productVendorService.getAllByOpenProjection(variantId);
+        // List<ProductVendorPO> getDataProduct = productVendorService.getAllByOpenProjection(variantId);
+        List<ProductVendorPO> getDataProduct = productVendorService.getAllByDynamicProjection(variantId);
 
         return new ResponseEntity<List<ProductVendorPO>>(getDataProduct, new HttpHeaders(), HttpStatus.OK);
     }
+
+    @PostMapping("/variant/invoice")
+    public ResponseEntity<List<ProductVariantInvoiceList>> getProductVariantForInvoice(
+            @RequestBody Map<String, String> bodyPayload
+    ) {
+        List<ProductVariantInvoiceList> getProductInvoiceList= productVariantService.getProductVariantInvoiceList();
+        return new ResponseEntity<List<ProductVariantInvoiceList>>(getProductInvoiceList, new HttpHeaders(), HttpStatus.OK);
+    }
+
 
 
 
