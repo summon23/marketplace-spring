@@ -3,6 +3,7 @@ package com.summon23.marketplacers.controller;
 import com.summon23.marketplacers.entity.ProductVariant;
 import com.summon23.marketplacers.entity.ProductVendor;
 import com.summon23.marketplacers.entity.projector.ProductVariantInvoiceList;
+import com.summon23.marketplacers.entity.projector.ProductVariantQuotationList;
 import com.summon23.marketplacers.entity.projector.ProductVendorListInvoice;
 import com.summon23.marketplacers.entity.projector.ProductVendorPO;
 import com.summon23.marketplacers.repository.ProductVariantRepository;
@@ -109,6 +110,13 @@ public class CatalogController {
         return new ResponseEntity<List<ProductVariantInvoiceList>>(getProductInvoiceList, new HttpHeaders(), HttpStatus.OK);
     }
 
+    @PostMapping("/variant/quotation")
+    public ResponseEntity<List<ProductVariantQuotationList>> getProductVariantForQuotation(
+            @RequestBody Map<String, String> bodyPayload
+    ) {
+        List<ProductVariantQuotationList> getProductInvoiceList= productVariantService.getProductVariantQuotation();
+        return new ResponseEntity<List<ProductVariantQuotationList>>(getProductInvoiceList, new HttpHeaders(), HttpStatus.OK);
+    }
 
 
 
